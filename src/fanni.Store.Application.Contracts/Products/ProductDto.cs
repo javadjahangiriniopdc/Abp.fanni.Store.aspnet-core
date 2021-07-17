@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Volo.Abp.Application.Dtos;
 
 namespace fanni.Store.Products
 {
-    public class ProductDto
+    public class ProductDto:AuditedEntityDto<int>
     {
         public string Name { get; set; }
         public int Pirce { get; set; }
