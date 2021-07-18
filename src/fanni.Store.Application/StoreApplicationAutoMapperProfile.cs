@@ -21,6 +21,9 @@ namespace fanni.Store
             CreateMap<Order, OrderDto>();
             CreateMap<CreateUpdateOrderDto, Order>();
 
+            CreateMap<Customer, CustomerLookupDto>();
+            CreateMap<Product, ProductLookupDto>();
+
         }
     }
 }

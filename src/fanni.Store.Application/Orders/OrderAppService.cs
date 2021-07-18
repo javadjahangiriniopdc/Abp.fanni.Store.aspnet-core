@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using fanni.Store.Customers;
 using fanni.Store.Products;
+using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Entities;
@@ -23,6 +24,14 @@ namespace fanni.Store.Orders
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IProductRepository _productRepository;
+        public OrderAppService(IRepository<Order, int> repository,
+            ICustomerRepository customerRepository
+            , IProductRepository productRepository) : base(repository)
+        {
+            _customerRepository = customerRepository;
+            _productRepository = productRepository;
+        }
+
         public async Task<ListResultDto<CustomerLookupDto>> GetCustomerLookupAsync()
         {
             var customers = await _customerRepository.GetListAsync();
@@ -41,13 +50,7 @@ namespace fanni.Store.Orders
             );
         }
 
-        public OrderAppService(IRepository<Order, int> repository,
-            ICustomerRepository customerRepository
-            ,IProductRepository productRepository) : base(repository)
-        {
-            _customerRepository = customerRepository;
-            _productRepository = productRepository;
-        }
+       
 
         public override async Task<OrderDto> GetAsync(int id)
         {
@@ -86,10 +89,10 @@ namespace fanni.Store.Orders
                 select new { order, customer,product };
 
             //Paging
-            // query = query
-            //     .OrderBy(NormalizeSorting(input.Sorting))
-            //     .Skip(input.SkipCount)
-            //     .Take(input.MaxResultCount);
+             query = query
+                 .OrderBy(NormalizeSorting(input.Sorting))
+                 .Skip(input.SkipCount)
+                 .Take(input.MaxResultCount);
 
             //Execute the query and get a list
             var queryResult = await AsyncExecuter.ToListAsync(query);
@@ -97,9 +100,10 @@ namespace fanni.Store.Orders
             //Convert the query result to a list of BookDto objects
             var orderDtos = queryResult.Select(x =>
             {
-                var bookDto = ObjectMapper.Map<Order, OrderDto>(x.order);
-                bookDto.CustomerName = x.customer.Name;
-                return bookDto;
+                var orderDto = ObjectMapper.Map<Order, OrderDto>(x.order);
+                orderDto.CustomerName = x.customer.Name;
+                orderDto.ProductName = x.product.Name;
+                return orderDto;
             }
                 ).ToList();
 

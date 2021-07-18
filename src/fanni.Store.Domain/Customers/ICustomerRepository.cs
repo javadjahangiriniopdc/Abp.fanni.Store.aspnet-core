@@ -10,7 +10,7 @@ namespace fanni.Store.Customers
     public interface ICustomerRepository: IRepository<Customer, int>
     {
         Task<Customer> FindByNameAsync(string name);
-
+        
         Task<List<Customer>> GetListAsync(
             int skipCount,
             int maxResultCount,

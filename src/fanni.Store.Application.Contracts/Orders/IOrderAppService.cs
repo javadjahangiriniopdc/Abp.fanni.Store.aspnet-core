@@ -14,7 +14,7 @@ namespace fanni.Store.Orders
             CreateUpdateOrderDto> //Used to create/update a book
     {
         // ADD the NEW METHOD
-        Task<ListResultDto<ProductLookupDto>> GetProductLookupAsync();
-        Task<ListResultDto<CustomerLookupDto>> GetCustomerLookupAsync();
+        // Task<ListResultDto<ProductLookupDto>> GetProductLookupAsync();
+        // Task<ListResultDto<CustomerLookupDto>> GetCustomerLookupAsync();
     }
 }

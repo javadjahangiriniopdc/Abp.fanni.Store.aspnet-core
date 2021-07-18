@@ -15,7 +15,7 @@ namespace fanni.Store.EntityFrameworkCore
 
             /* Configure your own tables/entities inside here */
 
-            builder.Entity<Customer>(b =>
+            builder.Entity<Customers.Customer>(b =>
             {
                 b.ToTable(StoreConsts.DbTablePrefix + "Customers",
                     StoreConsts.DbSchema);
@@ -23,7 +23,7 @@ namespace fanni.Store.EntityFrameworkCore
                 b.Property(x => x.Name).IsRequired().HasMaxLength(128);
             });
 
-            builder.Entity<Product>(b =>
+            builder.Entity<Products.Product>(b =>
             {
                 b.ToTable(StoreConsts.DbTablePrefix + "Products",
                     StoreConsts.DbSchema);
@@ -38,8 +38,8 @@ namespace fanni.Store.EntityFrameworkCore
                 b.ConfigureByConvention(); //auto configure for the base class props
                 b.Property(x => x.Description).IsRequired().HasMaxLength(128);
 
-                b.HasOne<Customer>().WithMany().HasForeignKey(x => x.CustomerId).IsRequired();
-                b.HasOne<Product>().WithMany().HasForeignKey(x => x.ProductId).IsRequired();
+                b.HasOne<Customers.Customer>().WithMany().HasForeignKey(x => x.CustomerId).IsRequired();
+                b.HasOne<Products.Product>().WithMany().HasForeignKey(x => x.ProductId).IsRequired();
 
             });
 

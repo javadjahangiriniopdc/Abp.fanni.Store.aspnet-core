@@ -12,7 +12,7 @@ namespace fanni.Store.Products
     public interface IProductRepository : IRepository<Product, int>
     {
         Task<Product> FindByNameAsync(string name);
-
+        
         Task<List<Product>> GetListAsync(
             int skipCount,
             int maxResultCount,

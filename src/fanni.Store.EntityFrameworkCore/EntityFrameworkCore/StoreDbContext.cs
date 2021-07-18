@@ -24,8 +24,8 @@ namespace fanni.Store.EntityFrameworkCore
     public class StoreDbContext : AbpDbContext<StoreDbContext>
     {
         public DbSet<AppUser> Users { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Customers.Customer> Customers { get; set; }
+        public DbSet<Products.Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         
 
