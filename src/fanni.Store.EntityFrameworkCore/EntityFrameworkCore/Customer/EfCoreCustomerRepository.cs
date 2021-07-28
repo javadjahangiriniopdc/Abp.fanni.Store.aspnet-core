@@ -11,7 +11,7 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace fanni.Store.EntityFrameworkCore.Customer
 {
-    class EfCoreCustomerRepository : EfCoreRepository<StoreDbContext, Customers.Customer, int>,
+    class EfCoreCustomerRepository : EfCoreRepository<StoreDbContext, Customers.Customer, Guid>,
         ICustomerRepository
     {
         public EfCoreCustomerRepository(IDbContextProvider<StoreDbContext> dbContextProvider) : base(dbContextProvider)

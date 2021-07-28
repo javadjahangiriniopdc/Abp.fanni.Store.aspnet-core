@@ -7,7 +7,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace fanni.Store.Customers
 {
-    public interface ICustomerRepository: IRepository<Customer, int>
+    public interface ICustomerRepository: IRepository<Customer, Guid>
     {
         Task<Customer> FindByNameAsync(string name);
         

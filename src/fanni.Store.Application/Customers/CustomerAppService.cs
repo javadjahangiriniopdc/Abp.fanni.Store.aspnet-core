@@ -12,12 +12,12 @@ namespace fanni.Store.Customers
     public class CustomerAppService : CrudAppService<
             Customer, //The Book entity
             CustomerDto, //Used to show books
-            int, //Primary key of the book entity
+            Guid, //Primary key of the book entity
             PagedAndSortedResultRequestDto, //Used for paging/sorting
             CreateUpdateCustomerDto>, //Used to create/update a book
         ICustomerAppService //implement the IBookAppService
     {
-        public CustomerAppService(IRepository<Customer, int> repository)
+        public CustomerAppService(IRepository<Customer, Guid> repository)
             : base(repository)
         {
         }

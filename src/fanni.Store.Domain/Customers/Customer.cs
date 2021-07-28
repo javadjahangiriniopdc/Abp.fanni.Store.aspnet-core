@@ -7,7 +7,7 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace fanni.Store.Customers
 {
-    public class Customer :AuditedAggregateRoot<int>
+    public class Customer :AuditedAggregateRoot<Guid>
     {
         public string Name { get; set; }
         public string Family { get; set; }

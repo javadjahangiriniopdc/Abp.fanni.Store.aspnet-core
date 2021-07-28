@@ -5,7 +5,7 @@ using Volo.Abp.Application.Dtos;
 
 namespace fanni.Store.Orders
 {
-  public  class CustomerLookupDto : EntityDto<int>
+  public  class CustomerLookupDto : EntityDto<Guid>
     {
         public string Name { get; set; }
     }

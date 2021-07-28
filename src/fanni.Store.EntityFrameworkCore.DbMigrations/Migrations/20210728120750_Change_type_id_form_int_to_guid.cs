@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace fanni.Store.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Change_type_id_form_int_to_guid : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -270,6 +270,46 @@ namespace fanni.Store.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AbpUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppCustomers",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Family = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppCustomers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppProducts",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Pirce = table.Column<int>(type: "int", nullable: false),
+                    ProductType = table.Column<int>(type: "int", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppProducts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -685,6 +725,42 @@ namespace fanni.Store.Migrations
                         name: "FK_AbpUserTokens_AbpUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AbpUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppOrders",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Count = table.Column<int>(type: "int", nullable: false),
+                    Pirce = table.Column<int>(type: "int", nullable: false),
+                    PriceAll = table.Column<int>(type: "int", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ExtraProperties = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    LastModificationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppOrders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppOrders_AppCustomers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "AppCustomers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AppOrders_AppProducts_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "AppProducts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1182,6 +1258,16 @@ namespace fanni.Store.Migrations
                 column: "UserName");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AppOrders_CustomerId",
+                table: "AppOrders",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppOrders_ProductId",
+                table: "AppOrders",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_IdentityServerClients_ClientId",
                 table: "IdentityServerClients",
                 column: "ClientId");
@@ -1272,6 +1358,9 @@ namespace fanni.Store.Migrations
                 name: "AbpUserTokens");
 
             migrationBuilder.DropTable(
+                name: "AppOrders");
+
+            migrationBuilder.DropTable(
                 name: "IdentityServerApiResourceClaims");
 
             migrationBuilder.DropTable(
@@ -1342,6 +1431,12 @@ namespace fanni.Store.Migrations
 
             migrationBuilder.DropTable(
                 name: "AbpUsers");
+
+            migrationBuilder.DropTable(
+                name: "AppCustomers");
+
+            migrationBuilder.DropTable(
+                name: "AppProducts");
 
             migrationBuilder.DropTable(
                 name: "IdentityServerApiResources");

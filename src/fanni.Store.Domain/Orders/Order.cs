@@ -7,10 +7,10 @@ using Volo.Abp.Domain.Entities.Auditing;
 
 namespace fanni.Store.Orders
 {
-  public  class Order : AuditedAggregateRoot<int>
+  public  class Order : AuditedAggregateRoot<Guid>
     {
-        public int CustomerId { get; set; }
-        public int ProductId { get; set; }
+        public Guid CustomerId { get; set; }
+        public Guid ProductId { get; set; }
         public string Description { get; set; }
         public int Count { get; set; }
         public int Pirce { get; set; }

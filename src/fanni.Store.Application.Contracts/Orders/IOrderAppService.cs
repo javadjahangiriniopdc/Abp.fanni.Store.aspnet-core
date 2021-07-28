@@ -9,7 +9,7 @@ namespace fanni.Store.Orders
 {
     public interface IOrderAppService : ICrudAppService< //Defines CRUD methods
             OrderDto, //Used to show books
-            int, //Primary key of the book entity
+            Guid, //Primary key of the book entity
             PagedAndSortedResultRequestDto, //Used for paging/sorting
             CreateUpdateOrderDto> //Used to create/update a book
     {

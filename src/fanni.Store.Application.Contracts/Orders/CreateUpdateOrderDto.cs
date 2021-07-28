@@ -7,8 +7,8 @@ namespace fanni.Store.Orders
 {
     public class CreateUpdateOrderDto
     {
-        public int CustomerId { get; set; }
-        public int ProductId { get; set; }
+        public Guid CustomerId { get; set; }
+        public Guid ProductId { get; set; }
         [Required]
         [StringLength(128)]
         public string Description { get; set; }

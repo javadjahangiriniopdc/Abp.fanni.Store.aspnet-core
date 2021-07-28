@@ -9,7 +9,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace fanni.Store.Products
 {
-    public interface IProductRepository : IRepository<Product, int>
+    public interface IProductRepository : IRepository<Product, Guid>
     {
         Task<Product> FindByNameAsync(string name);
         

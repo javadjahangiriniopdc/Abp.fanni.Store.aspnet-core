@@ -10,11 +10,11 @@ using Volo.Abp.Domain.Repositories;
 namespace fanni.Store.Products
 {
     public class ProductAppService : CrudAppService<Product,
-        ProductDto,int,
+        ProductDto,Guid,
         PagedAndSortedResultRequestDto,
         CreateUpdateProductDto>
     {
-        public ProductAppService(IRepository<Product, int> repository)
+        public ProductAppService(IRepository<Product, Guid> repository)
             : base(repository)
         {
 

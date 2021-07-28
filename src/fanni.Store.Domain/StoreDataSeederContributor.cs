@@ -12,14 +12,14 @@ namespace Acme.BookStore
     public class BookStoreDataSeederContributor
         : IDataSeedContributor, ITransientDependency
     {
-        private readonly IRepository<Customer, int> _customerRepository;
-        private readonly IRepository<Product, int> _productRepository;
-        private readonly IRepository<Order, int> _orderRepository;
+        private readonly IRepository<Customer, Guid> _customerRepository;
+        private readonly IRepository<Product, Guid> _productRepository;
+        private readonly IRepository<Order, Guid> _orderRepository;
 
         public BookStoreDataSeederContributor(
-            IRepository<Customer, int> customerRepository,
-            IRepository<Product, int> productRepository,
-            IRepository<Order, int> orderRepository
+            IRepository<Customer, Guid> customerRepository,
+            IRepository<Product, Guid> productRepository,
+            IRepository<Order, Guid> orderRepository
             )
         {
             _customerRepository = customerRepository;

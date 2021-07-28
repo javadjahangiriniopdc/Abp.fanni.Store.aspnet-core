@@ -11,7 +11,7 @@ using Volo.Abp.EntityFrameworkCore;
 
 namespace fanni.Store.EntityFrameworkCore.Product
 {
-    class EfCoreProductRepository : EfCoreRepository<StoreDbContext, Products.Product, int>,
+    class EfCoreProductRepository : EfCoreRepository<StoreDbContext, Products.Product, Guid>,
         IProductRepository
     {
         public EfCoreProductRepository(IDbContextProvider<StoreDbContext> dbContextProvider) : base(dbContextProvider)

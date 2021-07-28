@@ -17,14 +17,14 @@ namespace fanni.Store.Orders
          CrudAppService<
              Order, //The Book entity
              OrderDto, //Used to show books
-             int, //Primary key of the book entity
+             Guid, //Primary key of the book entity
              PagedAndSortedResultRequestDto, //Used for paging/sorting
              CreateUpdateOrderDto>, //Used to create/update a book
          IOrderAppService //implement the IBookAppService
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IProductRepository _productRepository;
-        public OrderAppService(IRepository<Order, int> repository,
+        public OrderAppService(IRepository<Order, Guid> repository,
             ICustomerRepository customerRepository
             , IProductRepository productRepository) : base(repository)
         {
@@ -52,7 +52,7 @@ namespace fanni.Store.Orders
 
        
 
-        public override async Task<OrderDto> GetAsync(int id)
+        public override async Task<OrderDto> GetAsync(Guid id)
         {
             //Get the IQueryable<Book> from the repository
             var queryable = await Repository.GetQueryableAsync();
